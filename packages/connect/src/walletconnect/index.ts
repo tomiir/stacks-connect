@@ -91,7 +91,6 @@ class WalletConnectProvider implements StacksProvider {
 
   private async getAddresses(): Promise<GetAddressesResult> {
     let session = this.provider.session;
-    console.log('>> WC session', session);
     if (!session) {
       ({ session } = await this.connect());
     }
@@ -140,7 +139,6 @@ class WalletConnectProvider implements StacksProvider {
 
   async request<M extends keyof MethodsRaw>(method: M, params?: MethodParamsRaw<M>): Promise<JsonRpcResponse<M>> {
     try {
-      console.log('>> WalletConnectProvider request', method, params);
 
       if (method === 'getAddresses') {
         const addresses = await this.getAddresses();
