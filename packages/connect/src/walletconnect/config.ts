@@ -1,6 +1,7 @@
-import { CustomCaipNetwork, UniversalConnectorConfig } from "@reown/appkit-universal-connector"
+import type { CaipNetwork } from "@reown/appkit"
 import { bitcoin } from "@reown/appkit/networks"
 import { MethodsRaw } from "../methods"
+import { Config } from "./types"
 
 const stacksMethods: (keyof MethodsRaw)[] = [
     'stx_signMessage',
@@ -18,8 +19,8 @@ const stacksMethods: (keyof MethodsRaw)[] = [
     'signPsbt',
     'getAddresses',
   ]
-  
-export const stacksMainnet: CustomCaipNetwork<'stacks'> = {
+
+export const stacksMainnet: CaipNetwork<undefined, Record<string, unknown>, 'stacks'> = {
     id: 1,
     chainNamespace: 'stacks' as const,
     caipNetworkId: 'stacks:1',
@@ -28,7 +29,7 @@ export const stacksMainnet: CustomCaipNetwork<'stacks'> = {
     rpcUrls: { default: { http: ['https://stacks-node-mainnet.stacks.co'] } }
 }
   
-export const config: UniversalConnectorConfig = {
+export const config: Config= {
     projectId: '702e2d45d9debca66795614cddb5c1ca',
     metadata: {
       name: 'Universal Connector',
@@ -39,7 +40,7 @@ export const config: UniversalConnectorConfig = {
     networks: [
       {
         methods: stacksMethods,
-        chains: [stacksMainnet as CustomCaipNetwork],
+        chains: [stacksMainnet as CaipNetwork],
         events: ['stx_chainChanged', 'stx_accountsChanged'],
         namespace: 'stacks'
       },

@@ -1,9 +1,12 @@
 {
   "name": "root",
   "private": true,
-
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "lerna run build",
+    
     "build:connect": "lerna run build --scope @stacks/connect",
     "build:connect-ui": "lerna run build --scope @stacks/connect-ui",
     "build:docs": "typedoc && mkdir -p docs/.github && cp -r .github/img docs/.github/img",
